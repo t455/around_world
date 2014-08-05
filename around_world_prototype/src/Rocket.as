@@ -54,7 +54,7 @@ package
 			this.x += stepX;
 			this.y += stepY;
 			
-			speed += .0015;
+			speed += .0010;
 			
 			var dist:Number = Math.sqrt((this.x * this.x) + (this.y * this.y));
 			
