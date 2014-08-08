@@ -1,8 +1,11 @@
 package
 {
+	import com.greensock.TweenLite;
 	import com.sevenson.geom.sat.Collision;
+	import display.Cloud;
 	import display.Layer;
 	import display.MoveableObject;
+	import display.Rocket;
 	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -37,11 +40,13 @@ package
 			for (var i:int = 0; i < _objects.length; i++) 
 			{
 				var object:MoveableObject = _objects[i];
+				object.update();
 				object.angle += _layers[object.layerID].rotationDiff;
 				
 				for (var j:int = 0; j < _rockets.length; j++) 
 				{
 					var rocket:Rocket = _rockets[j];
+					rocket.update();
 					if (Collision.testBoolean(rocket.collisionBox, object.collisionBox))
 						rocket.alpha = Math.random();
 				}
@@ -74,23 +79,40 @@ package
 		public function addRocket():void
 		{
 			var rocket:Rocket = new Rocket();
-			rocket.distance = RADIUS;
+			rocket.distance = RADIUS+rocket.width/2;
 			rocket.angle = int(Math.random() * 360);
 			addChild(rocket);
 			
 			_rockets.push(rocket);
 		}
 		
+		public function addCloudAt(id:int = 0):void
+		{
+			var cloud:Cloud = new Cloud();
+			cloud.layerID = id;
+			cloud.distance = RADIUS + id * LAYER_THICKNESS + (Math.random() * LAYER_THICKNESS) / 2 + LAYER_THICKNESS / 2;
+			
+			cloud.angle = int(Math.random() * 360);
+			addChild(cloud);
+			_objects.push(cloud);
+		}
+		
+		
 		public function addObjectOnLayer():void
 		{
-			var mo:MoveableObject = new MoveableObject();
-			mo.graphics.beginFill(0x00ff00);
-			mo.graphics.drawRect( -25, -25, 50, 50);
-			mo.distance = 150;
-			mo.angle = int(Math.random() * 360);
-			addChild(mo);
-			
-			_objects.push(mo);
+			//var mo:MoveableObject = new MoveableObject();
+			//mo.graphics.beginFill(0x00ff00);
+			//mo.graphics.drawRect( -10, -20, 20, 40);
+			//mo.distance = 150;
+			//mo.angle = int(Math.random() * 360);
+			//addChild(mo);
+			//
+			//_objects.push(mo);
+		}
+		
+		public function launchRocket():void 
+		{
+			_rockets[0].launch();
 		}
 		
 		//--------------------------------------------------------------------------

@@ -1,6 +1,7 @@
 package display 
 {
 	import com.sevenson.geom.sat.shapes.Box;
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	
 	/**
@@ -14,16 +15,18 @@ package display
 		private var _distance:Number = 0;
 		
 		public var layerID:int = 0;
+		public var sprite:MovieClip;
 		
-		public function MoveableObject() 
+		public function MoveableObject(visual:MovieClip) 
 		{
-			var collisionSprite:Sprite = getChildByName("collision_mc") as Sprite;
+			sprite = visual;
+			var collisionSprite:Sprite = sprite.getChildByName("collision_mc") as Sprite;
 			if (collisionSprite) {
 				collisionSprite.visible = false;
-				
 				_collisionBox.width = collisionSprite.width;
 				_collisionBox.height = collisionSprite.height;
 			}
+			addChild(sprite);
 		}
 		
 		//--------------------------------------------------------------------------
@@ -49,6 +52,10 @@ package display
 		//  Getters/Setters
 		//
 		//--------------------------------------------------------------------------
+		public function update():void
+		{
+			
+		}
 		
 		public function get collisionBox():Box 
 		{

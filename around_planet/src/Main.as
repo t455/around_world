@@ -38,19 +38,23 @@ package
 			setTimeout(planet.addLayer, 500);
 			setTimeout(planet.addLayer, 1000);
 			setTimeout(planet.addLayer, 1500);
-/*			planet.addLayer();
-			planet.addLayer();
-			planet.addLayer();*/
 			
-			planet.addObjectOnLayer();
-			planet.addObjectOnLayer();
-			planet.addObjectOnLayer();
+			planet.addCloudAt(0);
+			planet.addCloudAt(0);
+			planet.addCloudAt(0);
 			
 			stage.addEventListener(MouseEvent.MOUSE_WHEEL, mouseWheelHandler);
+			stage.addEventListener(MouseEvent.CLICK, stage_click);
+		}
+		
+		private function stage_click(e:MouseEvent):void 
+		{
+			planet.launchRocket();
 		}
 		
 		private const MIN_SCALE:Number = 0.2;
 		private const MAX_SCALE:Number = 1.5;
+		
 		private function mouseWheelHandler(e:MouseEvent):void 
 		{
 			var newScale:Number = planet.scaleX - (e.delta / 10);

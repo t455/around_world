@@ -16,7 +16,6 @@
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="src" />
-    <class path="F:\fs_git\flashrepo\src" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -53,7 +52,7 @@
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
-    <element path="assets\rocket.swc" />
+    <element path="assets\art.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

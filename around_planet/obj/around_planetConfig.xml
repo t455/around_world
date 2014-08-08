@@ -8,11 +8,11 @@
   <compiler>
     <define append="true">
       <name>CONFIG::debug</name>
-      <value>false</value>
+      <value>true</value>
     </define>
     <define append="true">
       <name>CONFIG::release</name>
-      <value>true</value>
+      <value>false</value>
     </define>
     <define append="true">
       <name>CONFIG::timeStamp</name>
@@ -30,20 +30,18 @@
       <name>CONFIG::desktop</name>
       <value>false</value>
     </define>
-    <optimize>true</optimize>
-    <omit-trace-statements>true</omit-trace-statements>
-    <verbose-stacktraces>false</verbose-stacktraces>
+    <verbose-stacktraces>true</verbose-stacktraces>
     <source-path append="true">
-      <path-element>C:\Users\User1\Desktop\around_planet\src</path-element>
-      <path-element>F:\fs_git\flashrepo\src</path-element>
+      <path-element>C:\Dropbox\Games\around_world\around_planet\src</path-element>
+      <path-element>C:\Dropbox\Games\libs</path-element>
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
     <library-path append="true">
-      <path-element>C:\Users\User1\Desktop\around_planet\assets\rocket.swc</path-element>
+      <path-element>C:\Dropbox\Games\around_world\around_planet\assets\art.swc</path-element>
     </library-path>
   </compiler>
   <file-specs>
-    <path-element>C:\Users\User1\Desktop\around_planet\src\Main.as</path-element>
+    <path-element>C:\Dropbox\Games\around_world\around_planet\src\Main.as</path-element>
   </file-specs>
   <default-background-color>#2B1E23</default-background-color>
   <default-frame-rate>60</default-frame-rate>
