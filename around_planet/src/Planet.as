@@ -2,7 +2,9 @@ package
 {
 	import com.greensock.TweenLite;
 	import com.sevenson.geom.sat.Collision;
-	import display.Cloud;
+	import display.Airplane;
+	import display.Helicopter;
+	import display.ThunderCloud;
 	import display.Layer;
 	import display.MoveableObject;
 	import display.Rocket;
@@ -47,8 +49,15 @@ package
 				{
 					var rocket:Rocket = _rockets[j];
 					rocket.update();
-					if (Collision.testBoolean(rocket.collisionBox, object.collisionBox))
+					
+					if (Collision.testBoolean(rocket.collisionBox, object.collisionBox)) {
 						rocket.alpha = Math.random();
+						
+						removeObject(object);
+						removeRocket(rocket);
+					} else if (rocket.distance > 800) {
+						removeRocket(rocket);
+					}
 				}
 			}
 		}
@@ -86,33 +95,55 @@ package
 			_rockets.push(rocket);
 		}
 		
-		public function addCloudAt(id:int = 0):void
+		public function addObjectOnLayer(type:uint, layer:int):MoveableObject
 		{
-			var cloud:Cloud = new Cloud();
-			cloud.layerID = id;
-			cloud.distance = RADIUS + id * LAYER_THICKNESS + (Math.random() * LAYER_THICKNESS) / 2 + LAYER_THICKNESS / 2;
+			var object:MoveableObject;
 			
-			cloud.angle = int(Math.random() * 360);
-			addChild(cloud);
-			_objects.push(cloud);
+			switch (type) 
+			{
+				case ObjectTypes.AIRPLANE: 			object = new Airplane();		break;
+				case ObjectTypes.HELICOPTER: 		object = new Helicopter();		break;
+				case ObjectTypes.THUNDERCLOUD: 		object = new ThunderCloud();	break;
+				default:
+			}
+			
+			if (object) {
+				object.layerID = layer;
+				object.distance = RADIUS + layer * LAYER_THICKNESS + LAYER_THICKNESS * .5;
+				object.startDistance = object.distance;
+				object.angle = int(Math.random() * 360);
+				addChild(object);
+				
+				_objects.push(object);
+			}
+			
+			return object;
 		}
 		
-		
-		public function addObjectOnLayer():void
+		public function removeObject(object:MoveableObject):void
 		{
-			//var mo:MoveableObject = new MoveableObject();
-			//mo.graphics.beginFill(0x00ff00);
-			//mo.graphics.drawRect( -10, -20, 20, 40);
-			//mo.distance = 150;
-			//mo.angle = int(Math.random() * 360);
-			//addChild(mo);
-			//
-			//_objects.push(mo);
+			var index:int = _objects.indexOf(object);
+			if (index >= 0) {
+				_objects.splice(index, 1);
+				
+				removeChild(object);
+			}
+		}
+		
+		public function removeRocket(rocket:Rocket):void
+		{
+			var index:int = _rockets.indexOf(rocket);
+			if (index >= 0) {
+				_rockets.splice(index, 1);
+				
+				removeChild(rocket);
+			}
 		}
 		
 		public function launchRocket():void 
 		{
-			_rockets[0].launch();
+			if(_rockets.length > 0)
+				_rockets[0].launch();
 		}
 		
 		//--------------------------------------------------------------------------

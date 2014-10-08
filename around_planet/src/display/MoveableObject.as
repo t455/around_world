@@ -16,6 +16,7 @@ package display
 		
 		public var layerID:int = 0;
 		public var sprite:MovieClip;
+		public var startDistance:Number = 0;
 		
 		public function MoveableObject(visual:MovieClip) 
 		{

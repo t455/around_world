@@ -7,10 +7,11 @@ package display
 	 * ...
 	 * @author Fushigi
 	 */
-	public class Cloud extends MoveableObject 
+	public class ThunderCloud extends MoveableObject 
 	{
+		private var _velocity:Number = 0.025;
 		
-		public function Cloud() 
+		public function ThunderCloud() 
 		{
 			super(new ThunderCloudClip());
 		}
@@ -18,7 +19,7 @@ package display
 		
 		override public function update():void
 		{
-			angle += 0.05;
+			angle += _velocity;
 		}
 	}
 

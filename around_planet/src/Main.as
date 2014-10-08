@@ -1,10 +1,13 @@
 package 
 {
 	import com.greensock.TweenLite;
+	import display.Airplane;
+	import display.Helicopter;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.utils.setTimeout;
+	import system.Direction;
 	
 	/**
 	 * ...
@@ -34,14 +37,22 @@ package
 			planet.addRocket();
 			planet.addRocket();
 			
-			planet.addLayer();
-			setTimeout(planet.addLayer, 500);
-			setTimeout(planet.addLayer, 1000);
-			setTimeout(planet.addLayer, 1500);
+			const numberOfLayers:int = 4;
+			for (var i:int = 0; i < numberOfLayers; i++) {
+				planet.addLayer();
+			}
 			
-			planet.addCloudAt(0);
-			planet.addCloudAt(0);
-			planet.addCloudAt(0);
+			planet.addObjectOnLayer(ObjectTypes.THUNDERCLOUD, 3);
+			planet.addObjectOnLayer(ObjectTypes.THUNDERCLOUD, 2);
+			planet.addObjectOnLayer(ObjectTypes.THUNDERCLOUD, 1);
+			planet.addObjectOnLayer(ObjectTypes.AIRPLANE, 3);
+			planet.addObjectOnLayer(ObjectTypes.HELICOPTER, 2);
+			
+			var airplane:Airplane = planet.addObjectOnLayer(ObjectTypes.AIRPLANE, 2) as Airplane;
+			var helicopter:Helicopter = planet.addObjectOnLayer(ObjectTypes.HELICOPTER, 1) as Helicopter;
+			
+			airplane.setDirection(Direction.LEFT);
+			helicopter.setDirection(Direction.LEFT);
 			
 			stage.addEventListener(MouseEvent.MOUSE_WHEEL, mouseWheelHandler);
 			stage.addEventListener(MouseEvent.CLICK, stage_click);
